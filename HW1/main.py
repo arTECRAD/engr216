@@ -13,6 +13,7 @@ def read_column(dataset, column):
         # Read the lines of the CSV and return lines as 
         # dictionaries into reader.
         reader = csv.DictReader(csvfile)
+        print("Field names:", reader.fieldnames) # debug the issue with cement_data keys being off
 
         # For each 'row' in reader (aka dicts)
         # find the 'column' key/value pairs, cast
