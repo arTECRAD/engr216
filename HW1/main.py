@@ -13,6 +13,12 @@ def read_column(dataset, column):
         # Read the lines of the CSV and return lines as 
         # dictionaries into reader.
         reader = csv.DictReader(csvfile)
+
+        # I had a difficult time getting the last two columns
+        # to find the keys correctly, and when I ran the line below,
+        # it turns out they were getting some weird characters in the 
+        # column keys. I used the output from this line to set the 
+        # column params for each function call.
         print("Field names:", reader.fieldnames) # debug the issue with cement_data keys being off
 
         # For each 'row' in reader (aka dicts)
@@ -36,8 +42,8 @@ def main():
     # Fetch data from the CSV
     water_data = read_column(filename, 'Water  (component 4)(kg in a m^3 mixture)')
     fine_ag_data = read_column(filename, 'Fine Aggregate (component 7)(kg in a m^3 mixture)')
-    cement_data = read_column(filename, 'Cement (component 1)(kg in a m^3 mixture)')
-    strength_data = read_column(filename, '"Concrete compressive strength(MPa, megapascals) "')
+    cement_data = read_column(filename, '\ufeffCement (component 1)(kg in a m^3 mixture)') # see the debug statement at line 22 for how I got this weirdness
+    strength_data = read_column(filename, 'Concrete compressive strength(MPa, megapascals) ') # so no quotes here? whatever... line 22 showed me this
 
     # Find the median, mean, and mode of the water data (PART A)
     print(f'PART A: Water Component Median = {median(water_data)} kg/m^3 mixture')
